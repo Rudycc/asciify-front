@@ -26,3 +26,20 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+.photoDragNew{
+  position: relative;
+  width: 75%;
+  height: 75%;
+  overflow: hidden;
+  border-radius: 0.3em;
+  border: #0A0A0A solid 0.2vw;
+  display: inline-block;
+  min-height: 200px;
+}
+
+.photUrlNew{
+  position: relative;
+  float: left;
+  width: 100%; 
+}

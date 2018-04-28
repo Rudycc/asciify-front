@@ -3,8 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "create-react-class": "^15.6.3",
     "react": "^16.3.2",
+    "react-console-component": "^0.6.1",
+    "react-copy-to-clipboard": "^5.0.1",
     "react-dom": "^16.3.2",
+    "react-dropzone": "^4.2.9",
     "react-scripts": "1.1.4"
   },
   "scripts": {
