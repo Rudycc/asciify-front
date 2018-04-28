@@ -17,48 +17,10 @@ class App extends Component {
     super(props)
     
     this.state = {
-      text: `@@@@@@@@@@@@@@GGLLtt11iiiittffGG@@@@@@@@@@@@@@
-            @@@@@@@@@@GGttiiiiiiiiiiiiiiiiii11GG@@@@@@@@@@
-            @@@@@@@@CC11iiiiiiiiiiiiiiiiiiiiii11CC@@@@@@@@
-            @@@@@@@@@@CCLLff11iiiiiiiiiiiiffCCGG@@@@@@@@@@
-            @@@@LL@@CCiiiiiittttiiiiiittff11iiiiLL@@CC@@@@
-            @@00ii@@CCiiiiiiii11ff11ff11iiiiiiiiLL@@11GG@@
-            @@ttiiGG88iiiiiiiiii11LL11iiiiiiiiiiGG00iitt@@
-            00iiiiff@@ffiiiiiitttttt11ttiiiiiitt@@LLiiii00
-            LLiiiiii0000iiiitt11iiLLii11ttiiiiGG88iiiiiiLL
-            ttiiiiiitt@@LLtt11iiiiLLiiii11ttff@@ffiiiiiitt
-            11iiiiiiiiCC@@ffttLLLLGGLLLLttff88CCiiiiiiii11
-            11iiiiiiii11888811iiiiLLiiii11008811iiiiiiii11
-            11iiiiiiiiff11880011iiLLii11008811ffiiiiiiii11
-            ttiiiiiitt11iitt880011tt110088ttii11ttiiiiiitt
-            LLiiiiiiffiiiiiitt8800tt0088ttiiiiiiffiiiiiiLL
-            00iiiiff11iiiiiiiitt88@@88ttiiiiiiii11ffiiii00
-            @@ttiiLLiiiiiiiiiiLL@@@@88ffiiiiiiiiiiCCiitt@@
-            @@0011GGiiiiiitt00@@CC11CC@@00ttiiiiiiGG1100@@
-            @@@@CC@@GGCC88@@00ttiiiiiitt88@@00LLCC@@CC@@@@
-            @@@@@@@@@@@@GGffiiiiiiiiiiiiiiff00@@@@@@@@@@@@
-            @@@@@@@@CCiiiiiiiiiiiiiiiiiiiiiiii11CC@@@@@@@@
-            @@@@@@@@@@00ttiiiiiiiiiiiiiiiiiitt00@@@@@@@@@@
-            @@@@@@@@@@@@@@00CCtt111111ttLL00@@@@@@@@@@@@@@
-            @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-            @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-            @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-            @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-            @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@88@@@@
-            ffCCGGCCffffGG88LLffGGCC@@CCCCGGGG@@GGCCGGtt00
-            LLCC@@@@CCCC@@@@CCLL@@@@@@ttCC@@@@@@ff@@@@00tt
-            LLCC@@@@CCCC@@@@CCffGG88@@00tt110088tt@@@@@@11
-            LLCC@@@@CCCC@@@@GGLL@@@@@@@@@@CCtt@@1188@@@@tt
-            CCCC@@@@CCCC@@@@00ttGG00@@GGGGLLCC@@GGttGGCC00
-            @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@88@@@@
-            @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-            @@88888888@@888888880088@@00@@888888@@880088@@
-            @@CCCCGGCCCCCCGGCCLLCCLLCCCC88CCCCLLCCCCGGff@@
-            @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-            @@@@@@00GGGG88CC0088GG00GGGGGGGG00GG0000@@@@@@
-            @@@@@@00GGGG@@GGGGGGCC00GGGGGGCCGGGG0000@@@@@@`,
+      text: '',
       preview: '',
-      formData: undefined,
+      image: undefined,
+      fileName: '',
     }
   }
 
@@ -68,15 +30,41 @@ class App extends Component {
       return
     }
     console.log(acceptedFile[0])
-    let formData = new FormData();
-    formData.append('image', acceptedFile[0])
+    const reader = new FileReader();
+    reader.onload = () => {
+        const image = reader.result;
+        console.log(image)
+        this.setState({
+          preview: acceptedFile[0].preview,
+          image,
+          fileName: acceptedFile[0].name,
+        })  
+    };
+    reader.onabort = () => console.log('file reading was aborted');
+    reader.onerror = () => console.log('file reading has failed');
 
-    axios.post('https://asciifier.galaxiaskyklos.com/Production', formData).then(console.log)
+    reader.readAsDataURL(acceptedFile[0]);
+  }
 
-    this.setState({
-      preview: acceptedFile[0].preview,
-      formData
-    })
+  asciify = () => {
+    fetch('https://r9l2cw9nk7.execute-api.us-east-2.amazonaws.com/Production',
+    {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        image: this.state.image,
+        fileName: this.state.fileName,
+      })
+    }).then(res => res.json()).then((text) => {
+      window.URL.revokeObjectURL(this.state.preview)
+      this.setState({
+        preview: '',
+        image: undefined,
+        text,
+      })
+    }).catch(console.log)
   }
 
   render() {
@@ -93,6 +81,7 @@ class App extends Component {
                 <img alt="ParaQueNoTruene" className="photUrlNew" src={this.state.preview} />
               }
             </Dropzone>
+            <button style={{display: 'inline-block'}} onClick={this.asciify} disabled={!this.state.image}>Asciify image</button>
           </div>
           <div style={{width: '50%', display: 'inline-block'}}>
             <Console text={this.state.text}/>
