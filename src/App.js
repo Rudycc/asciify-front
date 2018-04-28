@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import Dropzone from  'react-dropzone';
-import axios from 'axios';
 import './App.css';
 
 const Console = ({text}) => ((
