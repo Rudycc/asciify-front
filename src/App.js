@@ -91,7 +91,7 @@ class App extends Component {
                                 accept="image/jpeg,image/jpg,image/png" multiple={false}
                                 onDropRejected={this.handleDropRejected}>
               {this.state.preview === ''? 'Arrastra aqui tu foto':
-                <img className="photUrlNew" src={this.state.preview} />
+                <img alt="ParaQueNoTruene" className="photUrlNew" src={this.state.preview} />
               }
             </Dropzone>
           </div>
