@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import Dropzone from  'react-dropzone';
+import axios from 'axios';
 import './App.css';
 
 const Console = ({text}) => ((
@@ -66,17 +67,16 @@ class App extends Component {
       alert('File unsupported')
       return
     }
+    console.log(acceptedFile[0])
     let formData = new FormData();
     formData.append('image', acceptedFile[0])
+
+    axios.post('https://asciifier.galaxiaskyklos.com/Production', formData).then(console.log)
 
     this.setState({
       preview: acceptedFile[0].preview,
       formData
     })
-  }
-
-  handleDropRejected = () => {
-    alert('Something wrong')
   }
 
   render() {
@@ -88,8 +88,7 @@ class App extends Component {
         <div>
           <div style={{width: '50%', display: 'inline-block'}}>
             <Dropzone className="photoDragNew" onDrop={this.handleDrop}
-                                accept="image/jpeg,image/jpg,image/png" multiple={false}
-                                onDropRejected={this.handleDropRejected}>
+                                accept="image/jpeg,image/jpg,image/png" multiple={false} >
               {this.state.preview === ''? 'Arrastra aqui tu foto':
                 <img alt="ParaQueNoTruene" className="photUrlNew" src={this.state.preview} />
               }
