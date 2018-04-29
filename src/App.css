@@ -36,8 +36,8 @@
   background: rgb(239, 239, 239);
 }
 
-.asciify-btn {
-  height: auto;
+.btn {
+  min-height: 2rem;
 }
 
 .App-title {

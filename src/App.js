@@ -80,12 +80,12 @@ class App extends Component {
                 <img alt="ParaQueNoTruene" className="photUrlNew" src={this.state.preview} />
               }
             </Dropzone>
-            <button className="asciify-btn" onClick={this.asciify} disabled={!this.state.image}>Asciify image</button>
+            <button className="btn" onClick={this.asciify} disabled={!this.state.image}>Asciify image</button>
           </div>
           <div className="console-container">
             <Console text={this.state.text}/>
             <CopyToClipboard text={this.state.text} onCopy={() => {alert('copied')}}>
-              <button>Copy to clipboard</button>
+              <button className="btn">Copy to clipboard</button>
             </CopyToClipboard>
           </div>
         </div>
