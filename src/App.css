@@ -40,6 +40,10 @@
   background: rgb(239, 239, 239);
 }
 
+.asciify-btn {
+  height: auto;
+}
+
 .App-title {
   font-size: 1.5em;
 }

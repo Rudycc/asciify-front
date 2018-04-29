@@ -80,7 +80,7 @@ class App extends Component {
                 <img alt="ParaQueNoTruene" className="photUrlNew" src={this.state.preview} />
               }
             </Dropzone>
-            <button style={{display: 'inline-block'}} onClick={this.asciify} disabled={!this.state.image}>Asciify image</button>
+            <button className="asciify-btn" onClick={this.asciify} disabled={!this.state.image}>Asciify image</button>
           </div>
           <div className="console-container">
             <Console text={this.state.text}/>
