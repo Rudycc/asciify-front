@@ -69,6 +69,12 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+        <div className="svg-container">
+          <svg viewBox="0 0 800 400" className="svg">
+            <path id="curve" fill="#50c6d8" d="M 800 300 Q 400 350 0 300 L 0 0 L 800 0 L 800 300 Z">
+            </path>
+          </svg>
+        </div>
         <header className="App-header">
           <h1 className="App-title">Asciify</h1>
         </header>

@@ -3,19 +3,15 @@
 }
 
 .App-header {
-  background-color: rgb(51, 51, 51);
-  padding: 1rem 0;
-  color: white;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  color: #fff;
+  text-align: center;
 }
 
 .main-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: calc(100vh - 93px);
+  height: calc(100vh - 120px);
   flex-direction: column;
 }
 
@@ -36,14 +32,16 @@
   height: 100%;
   overflow: auto;
   background: rgb(239, 239, 239);
+  border: #50c6d8 solid 0.1vw;
 }
 
 .btn {
   min-height: 2rem;
+  box-sizing: border-box;
 }
 
 .App-title {
-  font-size: 1.5em;
+  font-size: 3em;
 }
 
 .App-intro {
@@ -61,15 +59,28 @@
   height: 75%;
   overflow: hidden;
   border-radius: 0.3em;
-  border: #0A0A0A solid 0.2vw;
+  border: #50c6d8 solid 0.2vw;
   display: inline-block;
   min-height: 200px;
+}
+
+.photoDragNew,
+.console {
+  margin-bottom: 1rem;
 }
 
 .photUrlNew{
   position: relative;
   float: left;
   width: 100%; 
+}
+
+.svg-container {
+  position: absolute;
+  top: -5%;
+  right: 0;
+  left: 0;
+  z-index: -1;
 }
 
 @media (min-width: 48rem) {
@@ -95,5 +106,9 @@
   .drag-container {
     justify-content: center;
     width: 30%;
+  }
+
+  svg path {
+    d: path("M 800 150 Q 400 175 0 150 L 0 0 L 800 0 L 800 150 Z");
   }
 }
