@@ -27,6 +27,15 @@
   padding: 3rem;
   height: 100%;
   align-items: center;
+  max-width: 40rem;
+  max-height: 50rem;
+}
+
+@media (min-width: 90rem) {
+  .console-container {
+    max-width: 70rem;
+    max-height: 70rem;
+  }
 }
 
 .console {
