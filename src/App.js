@@ -4,7 +4,7 @@ import Dropzone from  'react-dropzone';
 import './App.css';
 
 const Console = ({text}) => ((
-  <div style={{width: '100%', height: '500px', overflow: 'auto', background: '#efefef'}} >
+  <div className="console" >
     <div style={{fontFamily: ['Menlo', 'Consolas', 'DejaVu Sans Mono', 'monospace']}}>
       {text}
     </div>
@@ -72,8 +72,8 @@ class App extends Component {
         <header className="App-header">
           <h1 className="App-title">Asciify</h1>
         </header>
-        <div>
-          <div style={{width: '50%', display: 'inline-block'}}>
+        <div className="main-container">
+          <div className="drag-container">
             <Dropzone className="photoDragNew" onDrop={this.handleDrop}
                                 accept="image/jpeg,image/jpg,image/png" multiple={false} >
               {this.state.preview === ''? 'Arrastra aqui tu foto':
@@ -82,7 +82,7 @@ class App extends Component {
             </Dropzone>
             <button style={{display: 'inline-block'}} onClick={this.asciify} disabled={!this.state.image}>Asciify image</button>
           </div>
-          <div style={{width: '50%', display: 'inline-block'}}>
+          <div className="console-container">
             <Console text={this.state.text}/>
             <CopyToClipboard text={this.state.text} onCopy={() => {alert('copied')}}>
               <button>Copy to clipboard</button>
