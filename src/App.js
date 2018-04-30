@@ -28,11 +28,9 @@ class App extends Component {
       alert('File unsupported')
       return
     }
-    console.log(acceptedFile[0])
     const reader = new FileReader();
     reader.onload = () => {
         const image = reader.result;
-        console.log(image)
         this.setState({
           preview: acceptedFile[0].preview,
           image,
