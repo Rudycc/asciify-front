@@ -112,3 +112,15 @@
     d: path("M 800 150 Q 400 175 0 150 L 0 0 L 800 0 L 800 150 Z");
   }
 }
+
+.wait {
+  position: absolute;
+  top: 0%;
+  left: 0%;
+  width: 100%;
+  padding-top: 50%;
+  height: 70%;
+  background-color: black;
+  opacity: 0.4;
+  color: white;
+}

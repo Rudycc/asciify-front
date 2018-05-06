@@ -20,6 +20,9 @@ class App extends Component {
       preview: '',
       image: undefined,
       fileName: '',
+      height: 40,
+      width: 40,
+      sending: false,
     }
   }
 
@@ -44,6 +47,9 @@ class App extends Component {
   }
 
   asciify = () => {
+    this.setState({
+      sending: true,
+    })
     fetch('https://r9l2cw9nk7.execute-api.us-east-2.amazonaws.com/Production',
     {
       method: 'POST',
@@ -53,6 +59,8 @@ class App extends Component {
       body: JSON.stringify({
         image: this.state.image,
         fileName: this.state.fileName,
+        width: this.state.width,
+        height: this.state.height,
       })
     }).then(res => res.json()).then((text) => {
       window.URL.revokeObjectURL(this.state.preview)
@@ -60,8 +68,20 @@ class App extends Component {
         preview: '',
         image: undefined,
         text,
+        sending: false,
       })
-    }).catch(console.log)
+    }).catch(err => {
+      console.log(err)
+      this.setState({
+        sending: false,
+      })
+    })
+  }
+
+  updateSize = (dim) => ({target: { value }}) => {
+    this.setState({
+      [dim]: value <= 0 ? 1: value,
+    })
   }
 
   render() {
@@ -83,8 +103,17 @@ class App extends Component {
               {this.state.preview === ''? 'Arrastra aqui tu foto':
                 <img alt="ParaQueNoTruene" className="photUrlNew" src={this.state.preview} />
               }
+              {this.state.sending? <span className="wait" >Por favor espera...</span>: null}
             </Dropzone>
-            <button className="btn" onClick={this.asciify} disabled={!this.state.image}>Asciify image</button>
+            <div>
+              <span>Height: </span>
+              <input type="number" value={this.state.height} onChange={this.updateSize('height')} />
+            </div>
+            <div>
+              <span>Width: </span>
+              <input type="number" value={this.state.width} onChange={this.updateSize('width')} />
+            </div>
+            <button className="btn" onClick={this.asciify} disabled={!this.state.image || this.state.sending}>Asciify image</button>
           </div>
           <div className="console-container">
             <Console text={this.state.text}/>
