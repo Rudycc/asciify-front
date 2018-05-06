@@ -27,6 +27,14 @@
   max-height: 50rem;
 }
 
+.drag-container {
+  padding-top: 1rem;
+}
+
+.console-container {
+  padding-bottom: 1rem;
+}
+
 .console {
   width: 100%;
   height: 100%;
@@ -77,10 +85,28 @@
 
 .svg-container {
   position: absolute;
-  top: -5%;
+  top: -7%;
   right: 0;
   left: 0;
   z-index: -1;
+}
+.meassure {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 1.5rem;
+  width: 60%;
+}
+
+.meassure > input[type=number] {
+  border: solid #50c6d8 0.1vw;
+  width: 4rem;
+  min-height: 1.2rem;
+  text-align: center;
+}
+
+.meassure:last-of-type {
+  margin-bottom: 0.5rem;
 }
 
 @media (min-width: 48rem) {
@@ -106,6 +132,10 @@
   .drag-container {
     justify-content: center;
     width: 30%;
+  }
+
+  .meassure {
+    min-height: 2rem;
   }
 
   svg path {

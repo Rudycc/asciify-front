@@ -103,13 +103,13 @@ class App extends Component {
               {this.state.preview === ''? 'Arrastra aqui tu foto':
                 <img alt="ParaQueNoTruene" className="photUrlNew" src={this.state.preview} />
               }
-              {this.state.sending? <span className="wait" >Por favor espera...</span>: null}
+              {this.state.sending? <span className="wait" >Please wait...</span>: null}
             </Dropzone>
-            <div>
+            <div className="meassure">
               <span>Height: </span>
               <input type="number" value={this.state.height} onChange={this.updateSize('height')} />
             </div>
-            <div>
+            <div className="meassure">
               <span>Width: </span>
               <input type="number" value={this.state.width} onChange={this.updateSize('width')} />
             </div>
