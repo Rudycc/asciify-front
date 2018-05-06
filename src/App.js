@@ -23,6 +23,7 @@ class App extends Component {
       height: 40,
       width: 40,
       sending: false,
+      url: '',
     }
   }
 
@@ -61,6 +62,7 @@ class App extends Component {
         fileName: this.state.fileName,
         width: this.state.width,
         height: this.state.height,
+        url: this.state.url === '' ? undefined: this.state.url
       })
     }).then(res => res.json()).then((text) => {
       window.URL.revokeObjectURL(this.state.preview)
@@ -84,6 +86,10 @@ class App extends Component {
     })
   }
 
+  updateUrl = ({target: { value : url}}) => {
+    this.setState({ url })
+  }
+
   render() {
     return (
       <div className="App">
@@ -98,13 +104,19 @@ class App extends Component {
         </header>
         <div className="main-container">
           <div className="drag-container">
-            <Dropzone className="photoDragNew" onDrop={this.handleDrop}
+            {this.state.url === ''?<Dropzone className="photoDragNew" onDrop={this.handleDrop}
                                 accept="image/jpeg,image/jpg,image/png" multiple={false} >
               {this.state.preview === ''? 'Arrastra aqui tu foto':
                 <img alt="ParaQueNoTruene" className="photUrlNew" src={this.state.preview} />
               }
               {this.state.sending? <span className="wait" >Please wait...</span>: null}
-            </Dropzone>
+            </Dropzone>: null}
+            {!this.state.image?
+            this.state.sending?<span> Espera un poco </span>:
+            <div>
+              <span>URL: </span>
+              <input type="text" value={this.state.url} onChange={this.updateUrl} />
+            </div> : null}
             <div className="meassure">
               <span>Height: </span>
               <input type="number" value={this.state.height} onChange={this.updateSize('height')} />
@@ -113,7 +125,7 @@ class App extends Component {
               <span>Width: </span>
               <input type="number" value={this.state.width} onChange={this.updateSize('width')} />
             </div>
-            <button className="btn" onClick={this.asciify} disabled={!this.state.image || this.state.sending}>Asciify image</button>
+            <button className="btn" onClick={this.asciify} disabled={(!this.state.image && this.state.url === '') || this.state.sending}>Asciify image</button>
           </div>
           <div className="console-container">
             <Console text={this.state.text}/>
