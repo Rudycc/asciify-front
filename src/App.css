@@ -28,11 +28,11 @@
 }
 
 .drag-container {
-  padding-top: 1rem;
+  padding-top: 0.5rem;
 }
 
 .console-container {
-  padding-bottom: 1rem;
+  padding-bottom: 0.5rem;
 }
 
 .console {
@@ -90,6 +90,7 @@
   left: 0;
   z-index: -1;
 }
+
 .meassure {
   display: flex;
   justify-content: space-between;
@@ -98,11 +99,19 @@
   width: 60%;
 }
 
-.meassure > input[type=number] {
+.meassure > input[type=number],
+.meassure > input[type=text]  {
   border: solid #50c6d8 0.1vw;
-  width: 4rem;
   min-height: 1.2rem;
   text-align: center;
+}
+
+.meassure > input[type=number] {
+  width: 4rem;
+}
+
+.meassure > input[type=text] {
+  width: 9rem;
 }
 
 .meassure:last-of-type {
@@ -122,6 +131,7 @@
 
   .drag-container,
   .console-container {
+    padding: 3rem;
     box-sizing: border-box;
   }
 

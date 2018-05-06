@@ -113,7 +113,7 @@ class App extends Component {
             </Dropzone>: null}
             {!this.state.image?
             this.state.sending?<span> Espera un poco </span>:
-            <div>
+            <div className="meassure">
               <span>URL: </span>
               <input type="text" value={this.state.url} onChange={this.updateUrl} />
             </div> : null}
