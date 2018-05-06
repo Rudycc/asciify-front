@@ -106,7 +106,7 @@ class App extends Component {
           <div className="drag-container">
             {this.state.url === ''?<Dropzone className="photoDragNew" onDrop={this.handleDrop}
                                 accept="image/jpeg,image/jpg,image/png" multiple={false} >
-              {this.state.preview === ''? 'Arrastra aqui tu foto':
+              {this.state.preview === ''? 'Tap or drag your photo here':
                 <img alt="ParaQueNoTruene" className="photUrlNew" src={this.state.preview} />
               }
               {this.state.sending? <span className="wait" >Please wait...</span>: null}
