@@ -80,9 +80,9 @@ class App extends Component {
     })
   }
 
-  updateSize = (dim) => ({target: { value }}) => {
+  updateSize = dim => ({target: { value }}) => {
     this.setState({
-      [dim]: value <= 0 ? 1: value,
+      [dim]: value <= 0 ? 1: value >= 100? 100: value,
     })
   }
 
